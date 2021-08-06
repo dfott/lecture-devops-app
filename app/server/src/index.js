@@ -23,6 +23,7 @@ app.use(cors(corsOptions));
 
 app.use(cookieParser());
 
+/*
 app.use(helmet());
 app.use(helmet.contentSecurityPolicy({
     directives: {
@@ -31,6 +32,7 @@ app.use(helmet.contentSecurityPolicy({
         scriptSrc: ["'self' 'unsafe-inline' 'unsafe-eval'"]
     }
 }));
+*/
 
 app.use(todoRoutes);
 app.use(userRoutes);
@@ -40,7 +42,6 @@ app.use(envRoute);
 // NOTE: must be last one, because is uses a wildcard (!) that behaves aa
 // fallback and catches everything else
 app.use(errorRoutes);
-
 
 (async function main(){
     try{
