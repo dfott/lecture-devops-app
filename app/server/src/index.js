@@ -5,6 +5,7 @@ const cors = require('cors');
 const helmet = require('helmet');
 const dbClientInstance_ = require('./db/mongo.js');
 const todoRoutes = require('./routes/todo');
+const { metricRoutes, httpRequestMetric } = require('./routes/metrics');
 const userRoutes = require('./routes/user');
 const errorRoutes = require('./routes/error');
 const envRoute = require('./routes/env.js');
@@ -34,7 +35,18 @@ app.use(helmet.contentSecurityPolicy({
 }));
 */
 
+app.use(function(req, res, next) {
+    const end = httpRequestMetric.startTimer();
+    next();
+    end({ 
+        route: req.url, 
+        code: res.statusCode, 
+        methods: req.method
+    });
+});
+
 app.use(todoRoutes);
+app.use(metricRoutes);
 app.use(userRoutes);
 app.use('/', express.static(path.join(__dirname, `../public`)));
 // IMPORTANT: Educational purpose only! Possibly exposes sensitive data.
