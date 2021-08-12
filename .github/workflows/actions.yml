@@ -55,4 +55,4 @@ jobs:
       - name: setup kube-config
         run: aws eks --region us-east-1 update-kubeconfig --name eks
       - name: deploy frontend
-        run: kubectl set image deployment/todo-app dfott/todo:${{ github.sha }} -n dev
+        run: kubectl set image deployment/todo-app ${{ secrets.DOCKERHUB_USERNAME }}/todo:${{ github.sha }} -n dev
