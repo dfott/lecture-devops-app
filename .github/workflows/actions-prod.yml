@@ -1,5 +1,8 @@
 name: CD Pipeline
-on: [push]
+on: 
+  push:
+    branches:
+      - master
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -36,7 +39,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: dfott/todo:${{ github.sha }}
+          tags: dfott/todo-prod:${{ github.sha }},dfott/todo-prod:latest
 
       - name: Install AWS CLI
         uses: chrislennon/action-aws-cli@v1.1
@@ -57,4 +60,4 @@ jobs:
       - name: setup kube-config
         run: aws eks --region us-east-1 update-kubeconfig --name eks
       - name: deploy frontend
-        run: kubectl set image deployment/todo-app todo-app=dfott/todo:${{ github.sha }} -n dev
+        run: kubectl set image deployment/todo-app todo-app=dfott/todo-prod:${{ github.sha }} -n dev
