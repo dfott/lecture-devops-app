@@ -39,7 +39,7 @@ jobs:
         with:
           context: .
           push: true
-          tags: dfott/todo-prod:${{ github.sha }},dfott/todo-prod:latest
+          tags: dfott/todo-dev:${{ github.sha }},dfott/todo-dev:latest
 
       - name: Install AWS CLI
         uses: chrislennon/action-aws-cli@v1.1
@@ -60,4 +60,4 @@ jobs:
       - name: setup kube-config
         run: aws eks --region us-east-1 update-kubeconfig --name eks
       - name: deploy frontend
-        run: kubectl set image deployment/todo-app todo-app=dfott/todo-prod:${{ github.sha }} -n dev
+        run: kubectl set image deployment/todo-app todo-app=dfott/todo-dev:${{ github.sha }} -n dev
