@@ -28,6 +28,7 @@ describe( 'Model: Todos', ()=>{
 
         const todoRecord = await Todos.findOne({ user: todoData.user });
 
+        // eslint-disable-next-line no-unused-vars
         const { description, ...todoInfo } = todoData;
 
         expect( todoRecord ).toEqual( expect.objectContaining( todoInfo ) );

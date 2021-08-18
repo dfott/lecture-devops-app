@@ -26,6 +26,7 @@ describe( 'Model: Users', ()=>{
 
         const userRecord = await Users.findOne({ email: userData.email });
 
+        // eslint-disable-next-line no-unused-vars
         const { password, ...userInfo } = userData;
 
         expect( userRecord ).toEqual( expect.objectContaining( userInfo ) );

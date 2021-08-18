@@ -54,11 +54,11 @@ routes.patch('/todo/update', auth, async (req, res) => {
         return res.status(400).send({ error: 'Invalid fields to update!' });
     }
     const updateObj = {};
-    if (changedTodo.hasOwnProperty('important')) {
+    if (Object.prototype.hasOwnProperty.call(changedTodo ,'important')) {
         updateObj.important = changedTodo.important;
     }
 
-    if (changedTodo.hasOwnProperty('done')) {
+    if (Object.prototype.hasOwnProperty.call(changedTodo, 'done')) {
         updateObj.done = changedTodo.done;
     }
 
