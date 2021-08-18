@@ -19,10 +19,12 @@ jobs:
           npm ci
           npm test
       - name: Lint Server
-        run: npm run lint
+        run: |
+          cd app/server
+          npm ci
+          npm run lint
       - name: Test server
         run: |
-          ls
           cd app/server
           npm ci
           docker run -p 27017:27017 -d mongo
