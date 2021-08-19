@@ -1,6 +1,6 @@
-name: CD Pipeline
+name: Deployment Prod
 on: 
-  push:
+  workflow_dispatch:
     branches:
       - master
 jobs:
@@ -19,6 +19,11 @@ jobs:
           cd app/client
           npm ci
           npm test
+      - name: Lint Server
+        run: |
+          cd app/server
+          npm ci
+          npm run lint
       - name: Test server
         run: |
           ls

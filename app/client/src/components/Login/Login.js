@@ -87,6 +87,7 @@ class Login extends Component {
                                 group
                                 type="email"
                                 validate
+                                onKeyPress={this.handleKeyPress}
                                 error="wrong"
                                 success="right"
                                 value={this.state.email}
