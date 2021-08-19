@@ -40,7 +40,11 @@ class Login extends Component {
         return invalid
     }
 
-
+    handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            this.handleSubmit();
+        }
+    }
 
     handleSubmit = () => {
         const invalidField = this.validate()
@@ -99,6 +103,7 @@ class Login extends Component {
                                 group
                                 type="password"
                                 validate
+                                onKeyPress={this.handleKeyPress}
                                 value={this.state.password}
                                 onChange={this.handlePasswordInput}
                                 size={(this.state.emptyPassword) ? "lg inputErrorDiv" : "lg"}
