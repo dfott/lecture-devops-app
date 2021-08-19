@@ -3,7 +3,8 @@ const path = require( 'path' );
 const express = require('express');
 const cors = require('cors');
 // const helmet = require('helmet');
-// const dbClientInstance_ = require('./db/mongo.js');
+// eslint-disable-next-line no-unused-vars
+const dbClientInstance_ = require('./db/mongo.js');
 const todoRoutes = require('./routes/todo');
 const { metricRoutes, httpRequestMetric } = require('./routes/metrics');
 const userRoutes = require('./routes/user');
