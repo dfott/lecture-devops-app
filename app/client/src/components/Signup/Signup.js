@@ -22,6 +22,12 @@ class Signup extends Component {
         })
     }
 
+    handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            this.handleSubmit();
+        }
+    }
+
     handleEmailInput = (e) => {
         this.setState({
             email: e.target.value,
@@ -109,6 +115,7 @@ class Signup extends Component {
                                 group
                                 type="email"
                                 validate
+                                onKeyPress={this.handleKeyPress}
                                 error="wrong"
                                 success="right"
                                 value={this.state.email}
@@ -125,6 +132,7 @@ class Signup extends Component {
                                 group
                                 type="password"
                                 validate
+                                onKeyPress={this.handleKeyPress}
                                 value={this.state.password}
                                 onChange={this.handlePasswordInput}
                                 size={(this.state.emptyPassword) ? "lg inputErrorDiv" : "lg"}

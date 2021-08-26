@@ -2,7 +2,8 @@ const path = require( 'path' );
 
 const express = require('express');
 const cors = require('cors');
-const helmet = require('helmet');
+// const helmet = require('helmet');
+// eslint-disable-next-line no-unused-vars
 const dbClientInstance_ = require('./db/mongo.js');
 const todoRoutes = require('./routes/todo');
 const { metricRoutes, httpRequestMetric } = require('./routes/metrics');
