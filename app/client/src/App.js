@@ -25,7 +25,7 @@ class App extends Component {
       .then(user => {
         this.handleLogin(user)
       })
-      .catch(error => {
+      .catch(() => {
         this.setState({
           init: false
         })
@@ -53,7 +53,7 @@ class App extends Component {
 
   handleImportant = (index, id) => {
     updateTodo(id, !this.state.todos[index].important)
-      .then(todo => {
+      .then(() => {
         this.setState((ps) => {
           const newState = ps
           newState.todos[index].important = !newState.todos[index].important
@@ -67,7 +67,7 @@ class App extends Component {
 
   handleDone = (index, id) => {
     updateTodo(id, null, !this.state.todos[index].done)
-      .then(todo => {
+      .then(() => {
         this.setState((ps) => {
           const newState = ps
           newState.todos[index].done = !newState.todos[index].done
@@ -102,7 +102,7 @@ class App extends Component {
 
   handleDelete = (index, id) => {
     deleteTodo(id)
-      .then(todo => {
+      .then(() => {
         this.setState((ps) => ({
           todos: [...ps.todos.splice(0, index), ...ps.todos.splice(1, ps.todos.length)]
         }))
@@ -114,7 +114,7 @@ class App extends Component {
 
   handleSignout = () => {
     signout()
-      .then(user => {
+      .then(() => {
         this.setState({
           loggedInUser: '',
           token: '',

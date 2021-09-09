@@ -4,7 +4,7 @@ on:
     branches:
       - develop
 jobs:
-  deploy:
+  test-client:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
@@ -13,11 +13,25 @@ jobs:
         uses: actions/setup-node@v2
         with:
           node-version: '12.x'
+      - name: Lint client
+        run: |
+          cd app/client
+          npm ci
+          npm run lint
       - name: Test client
         run: |
           cd app/client
           npm ci
           npm test
+  test-server:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '12.x'
       - name: Lint Server
         run: |
           cd app/server
@@ -29,6 +43,12 @@ jobs:
           npm ci
           docker run -p 27017:27017 -d mongo
           PORT=3002 MONGODB_URL=mongodb://localhost:27017/testdb JWT_SECRET=testSecret npm run test
+  deploy:
+    runs-on: ubuntu-latest
+    needs: [test-client, test-server]
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v1
       - name: Login to DockerHub

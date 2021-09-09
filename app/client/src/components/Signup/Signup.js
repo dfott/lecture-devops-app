@@ -62,7 +62,7 @@ class Signup extends Component {
         }
         else {
             signup(this.state.name, this.state.email, this.state.password)
-                .then(user => {
+                .then(() => {
                     this.props.signupDone()
                 })
                 .catch(error => {
