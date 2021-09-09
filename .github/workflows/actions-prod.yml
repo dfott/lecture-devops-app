@@ -45,6 +45,7 @@ jobs:
           PORT=3002 MONGODB_URL=mongodb://localhost:27017/testdb JWT_SECRET=testSecret npm run test
   deploy:
     runs-on: ubuntu-latest
+    needs: [test-client, test-server]
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
